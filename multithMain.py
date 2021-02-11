@@ -6,7 +6,7 @@ from PiCANRec import *
 
 
 time.sleep(180)
-#For test purposes uncoment the following try-exception 
+#For deployment purposes uncoment the following try-exception 
 #try:
 #    dateTime()
 #except Exception as e:
@@ -26,22 +26,8 @@ try:
 
 except KeyboardInterrupt:
 
-    finish = time.time()
-    print('\nWebcam%i Captured %d frames at %.2ffps' % (
-    cam1.camera_id,
-    cam1.i,
-    cam1.i / (finish - start)))
-    print('Time:{}'.format(finish - start))
-    
-    #print('\nPiCam Captured %d frames at %.2ffps' % (
-    #picam.i,
-    #picam.i / (finish - start)))
-    #print('Time:{}'.format(finish - start))
-
     cam1.workFinished()
     cam2.workFinished()
     cam3.workFinished()
     cam4.workFinished()
-    #cam2.workFinished()
-    #picam.workFinished()
 
