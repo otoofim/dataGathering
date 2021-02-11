@@ -18,7 +18,6 @@ def dateTime():
             hour = time[7]
             subprocess.call(['sudo', 'date', '-s', '{}/{}/{} {}:{}:{}'.format(year, month, day, hour, minute, s)])
             return
-            #return [day, month, year, hour, minute, s]
         print('Waiting for CAN BUS')
 
 if __name__ == "__main__":
