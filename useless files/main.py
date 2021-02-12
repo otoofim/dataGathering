@@ -4,7 +4,7 @@ import time
 
 
 
-cam1 = camera(5)
+cam1 = camera(200)
 #cam2 = camera(1)
 #picam = piCamera()
 

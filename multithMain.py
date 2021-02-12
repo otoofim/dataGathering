@@ -2,19 +2,21 @@ import cv2
 from mltith import *
 import time
 from PiCANRec import *
+from cameraNum import *
 
 
 
-time.sleep(180)
+
 #For deployment purposes uncoment the following try-exception 
-#try:
-#    dateTime()
-#except Exception as e:
-#    print('CAN BUS not working:{}'.format(str(e)))
-cam1 = camera(0, True)
-cam2 = camera(1, True)
-cam3 = camera(3, True)
-cam4 = camera(5, True)
+try:
+   dateTime()
+except Exception as e:
+   print('CAN BUS not working:{}'.format(str(e)))
+camnum = cameranum()
+cam1 = camera(camnum[0], True)
+cam2 = camera(camnum[1], True)
+cam3 = camera(camnum[2], True)
+cam4 = camera(camnum[3], True)
 
 
 start = time.time()

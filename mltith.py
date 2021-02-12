@@ -15,21 +15,23 @@ class camera(threading.Thread):
         threading.Thread.__init__(self)
         self.camera_id = cam_num
         self.cap = cv2.VideoCapture(cam_num)
-        self.i = 0
-        self.save = save
-        self.width = 480
-        self.height = 640
-        self.cap.set(3, self.height)
-        self.cap.set(4, self.width)
-        date = datetime.now()
+        if self.IsCamAva():
+            self.i = 0
+            self.save = save
+            self.width = 480
+            self.height = 640
+            self.cap.set(3, self.height)
+            self.cap.set(4, self.width)
+            date = datetime.now()
+            
+            base_add = '/home/pi/ssd/winter2021/'
+            #base_add = '/home/pi/Desktop/test/'
         
-        
-        if not os.path.exists("/home/pi/ssd/winter2021/cam{}".format(self.camera_id)):
-            os.mkdir('/home/pi/ssd/winter2021/cam{}'.format(self.camera_id))
-        if not os.path.exists('/home/pi/ssd/winter2021/cam{}/{}'.format(self.camera_id, date.strftime('%y.%m.%d'))):
-            os.mkdir('/home/pi/ssd/winter2021/cam{}/{}'.format(self.camera_id, date.strftime('%y.%m.%d')))
-
-        self.save_add = '/home/pi/ssd/winter2021/cam{}/{}/'.format(self.camera_id, date.strftime('%y.%m.%d'))
+            if not os.path.exists(base_add + "cam{}".format(self.camera_id)):
+                os.mkdir(base_add + 'cam{}'.format(self.camera_id))
+            if not os.path.exists(base_add + 'cam{}/{}'.format(self.camera_id, date.strftime('%y.%m.%d'))):
+                os.mkdir(base_add + 'cam{}/{}'.format(self.camera_id, date.strftime('%y.%m.%d')))
+            self.save_add = base_add + 'cam{}/{}/'.format(self.camera_id, date.strftime('%y.%m.%d'))
 
     def IsCamAva(self):
         return self.cap.isOpened()
@@ -44,7 +46,10 @@ class camera(threading.Thread):
             else:
                 print("Frame can not be retrieved.")
         else:
-            print("The camera is not available.")
+            print("The camera{} is not available.".format(self.camera_id))
+            self.cap.release()
+            cv2.destroyAllWindows()
+            self.cap = cv2.VideoCapture(self.camera_id)
 
     def PicTime(self):
         try:
@@ -61,7 +66,6 @@ class camera(threading.Thread):
             f = open("/home/pi/Desktop/logcam{}.txt".format(str(self.camera_id)), "a")
             f.write(str(e) + "\n")
             f.close()
-            #print(e)
 
     def workFinished(self):
         self.cap.release()

@@ -7,6 +7,7 @@ def dateTime():
     bus = can.interface.Bus(can_interface, bustype='socketcan')
 
     while True:
+        print('Waiting for CAN BUS...')
         message = bus.recv()
         if int(message.arbitration_id) == 1536:
             time = list(message.data)
@@ -18,7 +19,7 @@ def dateTime():
             hour = time[7]
             subprocess.call(['sudo', 'date', '-s', '{}/{}/{} {}:{}:{}'.format(year, month, day, hour, minute, s)])
             return
-        print('Waiting for CAN BUS')
+        
 
 if __name__ == "__main__":
     dateTime()

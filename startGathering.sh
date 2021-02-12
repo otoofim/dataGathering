@@ -1,3 +1,4 @@
-#sudo /home/pi/.pyenv/versions/data_gathering/bin/python /home/pi/camera/main.py
+sleep 180s
 sudo /home/pi/.pyenv/versions/data_gathering/bin/python /home/pi/camera/multithMain.py
-#sudo /home/pi/.pyenv/versions/data_gathering/bin/python /home/pi/Desktop/listc.py
+#coment the following lines for deployment time
+#/home/pi/.pyenv/versions/data_gathering/bin/python /home/pi/camera/timeSetTest.py
