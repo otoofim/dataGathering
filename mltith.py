@@ -25,7 +25,7 @@ class camera(threading.Thread):
             date = datetime.now()
             
             base_add = '/home/pi/ssd/winter2021/'
-            #base_add = '/home/pi/Desktop/test/'
+            #base_add = '/home/pi/camera/test/'
         
             if not os.path.exists(base_add + "cam{}".format(self.camera_id)):
                 os.mkdir(base_add + 'cam{}'.format(self.camera_id))
@@ -56,14 +56,14 @@ class camera(threading.Thread):
             frame, now = self.getFrame()
             frame = cv2.resize(frame, (self.height, self.width), interpolation = cv2.INTER_AREA)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(frame, str(now),(frame.shape[1] - 200, frame.shape[0] - 10), font, 0.6,(255,255,255),2,cv2.LINE_AA)
+            #cv2.putText(frame, str(now),(frame.shape[1] - 200, frame.shape[0] - 10), font, 0.6,(255,255,255),2,cv2.LINE_AA)
             if self.save:
                 cv2.imwrite(self.save_add + '{}.jpeg'.format(datetime.now().strftime('%H.%M.%S.%f')), frame)
             self.i += 1
             return frame, now
         except Exception as e:
             
-            f = open("/home/pi/Desktop/logcam{}.txt".format(str(self.camera_id)), "a")
+            f = open("/home/pi/camera/test/logcam{}.txt".format(str(self.camera_id)), "a")
             f.write(str(e) + "\n")
             f.close()
 

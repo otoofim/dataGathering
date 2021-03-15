@@ -13,23 +13,26 @@ try:
 except Exception as e:
    print('CAN BUS not working:{}'.format(str(e)))
 camnum = cameranum()
+#print(camnum)
 cam1 = camera(camnum[0], True)
 cam2 = camera(camnum[1], True)
 cam3 = camera(camnum[2], True)
-cam4 = camera(camnum[3], True)
+#cam4 = camera(3, True)
 
 
 start = time.time()
 try:
+    #pass
     cam1.start()
     cam2.start()
     cam3.start()
-    cam4.start()
+    #cam4.start()
 
 except KeyboardInterrupt:
-
+    
+    #pass
     cam1.workFinished()
     cam2.workFinished()
     cam3.workFinished()
-    cam4.workFinished()
+    #cam4.workFinished()
 
